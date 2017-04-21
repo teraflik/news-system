@@ -1,6 +1,6 @@
 <?php
 $page = "home"; 
-include "dbconn.php"; 
+include "dbconn.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,11 +18,12 @@ include "dbconn.php";
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<?php
+				/*Only for debugging purposes.*/
 					if( isset($_SESSION['Message']) ){
 	        			echo $_SESSION['Message'];
 	        			unset($_SESSION['Message']);
 					}
-					?>
+				?>
 			</div>
 		</div>
 

@@ -1,5 +1,6 @@
 <?php
-  $page = "developers"; 
+  $page = "developers";
+  include "dbconn.php"; 
 ?>
 <!DOCTYPE html>
 <html>
