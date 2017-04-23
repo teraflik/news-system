@@ -1,60 +1,85 @@
 <?php
 $DB_SERVER = "localhost";
 $DB_USER = "root";
-$DB_PASS = "G0ne9128";
+$DB_PASS = "";
 $DB_NAME = "news";
+$_SESSION['Message'] = "";
 
-// Connect to MySQL
-$link = mysqli_connect($DB_SERVER, $DB_USER, $DB_PASS);
-if (mysqli_connect_errno()) {
-	printf("Connect failed: %s\n", mysqli_connect_error());
+/* Connect to MySQL database using above credentials. */
+$link = new mysqli($DB_SERVER, $DB_USER, $DB_PASS);
+if ($link->connect_errno) {
+	printf("Connect failed: %s\n", $link->connect_error);
 	exit();
 }
 
-$db_selected = mysqli_select_db($link, $DB_NAME);
-
-if ($db_selected){
-	$_SESSION['Message'] = "<strong>Message: </strong>Database Selected!";
+if ( $link->select_db($DB_NAME) ){
+	$_SESSION['Message'] .= "<strong>Message: </strong>Database Selected!";
 }
 else{
 	$sql = 'CREATE DATABASE '.$DB_NAME;
-	if (!mysqli_query($link, $sql)) {
-		$_SESSION['Message'] = "<strong>Error: </strong>".mysqli_error($link);
+	if ($link->query($sql) === TRUE) {
+		$_SESSION['Message'] .= "<strong>Message: </strong>Database Created!";
 	}
 	else{
-		$_SESSION['Message'] = "<strong>Message: </strong>Database Created!";
+		$_SESSION['Message'] .= "<strong>Error: </strong>".$link->error;
 	}
 }
 
 $tables = 
 "
 CREATE TABLE IF NOT EXISTS `news` (
-`newsID` INT(5) PRIMARY KEY,
-`news` TEXT NOT NULL
+	`newsID` INT(7) PRIMARY KEY,
+	`news` TEXT NOT NULL
 );
 CREATE TABLE IF NOT EXISTS `user` (
-`userID` INT(5) PRIMARY KEY,
-`username` VARCHAR(255) NOT NULL,
-`password` VARCHAR(50) NOT NULL
+	`userID` INT(7) PRIMARY KEY,
+	`username` VARCHAR(255) NOT NULL,
+	`password` VARCHAR(50) NOT NULL
 ); 
-CREATE TABLE IF NOT EXISTS `rating` (
-`userID` INT(5),
-`newsID` CHAR(5),
-`rating` TINYINT(4),
-`timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-PRIMARY KEY  ('userID','newsID')
+CREATE TABLE IF NOT EXISTS `comment` (
+	`commentID` INT(7),
+	`userID` INT(7) NOT NULL,
+	`newsID` INT(7) NOT NULL,
+	`comment` TEXT NOT NULL,
+	FOREIGN KEY (`userID`) REFERENCES `user`(`userID`) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (`newsID`) REFERENCES `news`(`newsID`) ON UPDATE CASCADE ON DELETE CASCADE,
+	PRIMARY KEY(`commentID`)
+);
+CREATE TABLE `rating` (
+	`userID` INT(7),
+	`newsID` INT(7),
+	`rating` TINYINT(4),
+	`timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	FOREIGN KEY (`userID`) REFERENCES `user`(`userID`) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (`newsID`) REFERENCES `news`(`newsID`) ON UPDATE CASCADE ON DELETE CASCADE,
+	PRIMARY KEY  (`userID`,`newsID`)
 );
 CREATE TABLE IF NOT EXISTS `favourite` (
-`userID` INT(5),
-`newsID` CHAR(5),
-PRIMARY KEY  ('userID','newsID')
+	`userID` INT(7),
+	`newsID` INT(7),
+	FOREIGN KEY (`userID`) REFERENCES `user`(`userID`) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (`newsID`) REFERENCES `news`(`newsID`) ON UPDATE CASCADE ON DELETE CASCADE,
+	PRIMARY KEY  (`userID`,`newsID`)
+);
+CREATE TABLE IF NOT EXISTS `category` (
+	`categoryID` INT(7) PRIMARY KEY,
+	`name` CHAR(50)
+);
+CREATE TABLE IF NOT EXISTS `newsCategory` (
+	`newsID` INT(7),
+	`categoryID` INT(7),
+	FOREIGN KEY (`newsID`) REFERENCES `news`(`newsID`) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (`categoryID`) REFERENCES `category`(`categoryID`) ON UPDATE CASCADE ON DELETE CASCADE,
+	PRIMARY KEY  (`newsID`,`categoryID`)
 );
 ";
 
-if (!mysqli_multi_query($link, $tables)) {
-	$_SESSION['Message'] .= "<br><strong>Error: </strong>".mysqli_error($link);
+if ($link->multi_query($tables)) {
+	$_SESSION['Message'] .= "<br><strong>Message: </strong>Tables Created!";
+	while ($link->next_result()) {;}
 }
 else{
-	$_SESSION['Message'] .= "<br><strong>Message: </strong>Tables Created!";
+	$_SESSION['Message'] .= "<br><strong>Error: </strong>".mysqli_error($link);
 }
+
 ?>
