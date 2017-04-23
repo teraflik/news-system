@@ -3,7 +3,7 @@ $DB_SERVER = "localhost";
 $DB_USER = "root";
 $DB_PASS = "";
 $DB_NAME = "news";
-$_SESSION['Message'] = "";
+
 $DEBUG = 0;
 
 /* Connect to MySQL database using above credentials. */
@@ -14,31 +14,33 @@ if ($link->connect_errno) {
 }
 
 if ( $link->select_db($DB_NAME) ){
-	$_SESSION['Message'] .= "<strong>Message: </strong>Database Selected!";
+	$_SESSION['log'] = "<strong>Message: </strong>Database Selected!";
 }
 else{
 	$sql = 'CREATE DATABASE '.$DB_NAME;
 	if ($link->query($sql) === TRUE) {
-		$_SESSION['Message'] .= "<strong>Message: </strong>Database Created!";
+		$_SESSION['log'] = "<strong>Message: </strong>Database Created!";
 	}
 	else{
-		$_SESSION['Message'] .= "<strong>Error: </strong>".$link->error;
+		$_SESSION['log'] = "<strong>Error: </strong>".$link->error;
 	}
 }
 
 $tables = 
 "
 CREATE TABLE IF NOT EXISTS `news` (
-	`newsID` INT(7) PRIMARY KEY,
-	`news` TEXT NOT NULL
+	`newsID` INT(7) AUTO_INCREMENT,
+	`news` TEXT NOT NULL,
+	PRIMARY KEY(`newsID`)
 );
 CREATE TABLE IF NOT EXISTS `user` (
-	`userID` INT(7) PRIMARY KEY,
+	`userID` INT(7) AUTO_INCREMENT,
 	`username` VARCHAR(255) NOT NULL,
-	`password` VARCHAR(50) NOT NULL
+	`password` VARCHAR(50) NOT NULL,
+	 PRIMARY KEY(`userID`)
 ); 
 CREATE TABLE IF NOT EXISTS `comment` (
-	`commentID` INT(7),
+	`commentID` INT(7) AUTO_INCREMENT,
 	`userID` INT(7) NOT NULL,
 	`newsID` INT(7) NOT NULL,
 	`comment` TEXT NOT NULL,
@@ -63,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `favourite` (
 	PRIMARY KEY  (`userID`,`newsID`)
 );
 CREATE TABLE IF NOT EXISTS `category` (
-	`categoryID` INT(7) PRIMARY KEY,
+	`categoryID` INT(7) PRIMARY KEY AUTO_INCREMENT,
 	`name` CHAR(50)
 );
 CREATE TABLE IF NOT EXISTS `newsCategory` (
@@ -76,11 +78,11 @@ CREATE TABLE IF NOT EXISTS `newsCategory` (
 ";
 
 if ($link->multi_query($tables)) {
-	$_SESSION['Message'] .= "<br><strong>Message: </strong>Tables Created!";
+	$_SESSION['log'] .= "<br><strong>Message: </strong>Tables Created!";
 	while ($link->next_result()) {;}
 }
 else{
-	$_SESSION['Message'] .= "<br><strong>Error: </strong>".mysqli_error($link);
+	$_SESSION['log'] .= "<br><strong>Error: </strong>".mysqli_error($link);
 }
 
 ?>

@@ -1,7 +1,26 @@
 <?php
-$page = "login"; 
+$page = "login";
 include "dbconn.php";
+if (isset($_POST['username'])){
+    $username = stripslashes($_REQUEST['username']);
+    $username = $link->real_escape_string($username);
+    $password = stripslashes($_REQUEST['password']);
+    $password = $link->real_escape_string($password);
+    $query = "SELECT * FROM `user` WHERE `username`='$username' and `password`='$password'";
+    $result = $link->query($query) or die($link->error());
+    $rows = $result->num_rows;
+    if($rows == 1){
+        session_start();
+        $_SESSION['username'] = $username;
+        header("Location: index.php");
+    }
+    else{
+        $_SESSION['MESSAGE'] = "Invalid Username or Password";
+	    $_SESSION['MESSAGE_TYPE'] = "alert-info";
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,10 +33,22 @@ include "dbconn.php";
 	<?php include("navbar.php"); ?>
     <div class="wrapper">
 	<div class="container form-signin">
-		<div class="alert alert-danger" role="alert">
-	        Your username and password didn't match. Please try again.
-		</div>
-	
+        <?php
+            echo '<div class="alert '; 
+            if (!empty($_SESSION['MESSAGE_TYPE'])) {
+                echo $_SESSION['MESSAGE_TYPE'];
+                unset($_SESSION['MESSAGE_TYPE']);
+            }
+            else{
+                echo '"alert-warning"';
+            }
+            echo '" role="alert">';
+                if (!empty($_SESSION['MESSAGE'])) {
+                echo $_SESSION['MESSAGE'];
+                unset($_SESSION['MESSAGE']);
+            }
+            echo '</div>';
+        ?>
         <form method="post" action="login.php">
             <h2 class="form-signin-heading">Sign In</h2>
 
