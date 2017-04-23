@@ -42,11 +42,11 @@ if($DEBUG == 1){
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
-		<h3>Log:</h3>
+		<h5>Server Log:</h5>
 		<p>';
-			if( isset($_SESSION['log']) ){
-				echo $_SESSION['log'];
-				unset($_SESSION['log']);
+			if( isset($server_log) ){
+				echo $server_log;
+				unset($server_log);
 			}
 	echo'
 		</p>

@@ -1,13 +1,12 @@
 <?php
-  $page = "developers";
-  include "dbconn.php"; 
+$page = "developers";
+include "dbconn.php";
 ?>
 <!DOCTYPE html>
 <html>
   <head>
     <?php include("header.html"); ?>
-    <meta charset="UTF-8">
-    <title> Developers</title>
+    <title>Developers</title>
     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900'>
     <link rel="stylesheet" href="css/developers.css">
   </head>
@@ -15,8 +14,7 @@
 
 <?php include("navbar.php"); ?>
 
-<main>
-<div class="container">
+<main class="wrapper">
   <div class="at-section">
     <div class="at-section__title">Developers</div>
   </div>
@@ -83,9 +81,6 @@
               </svg></a></li>
         </ul>
       </div>
-    </div>
-    <br>
     </main>
-
     </body>
 </html>

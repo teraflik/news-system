@@ -2,8 +2,8 @@
 $page = "register"; 
 include "dbconn.php";
 if (isset($_POST['username'])){
-	$username = stripslashes($_POST['username']); // removes backslashes
-	$username = $link->real_escape_string($username);  //escapes special characters in a string
+	$username = stripslashes($_POST['username']);
+	$username = $link->real_escape_string($username);
 	$password = stripslashes($_POST['password']);
 	$password = $link->real_escape_string($password);
 	$confirmPassword = stripslashes($_POST['confirm_password']);
@@ -15,7 +15,6 @@ if (isset($_POST['username'])){
 	else{
 		$query = "INSERT into `user` (`username`, `password`) VALUES ('$username', '$password')";
 		if( $link->query($query) ){
-			session_start();
 			$_SESSION['MESSAGE'] = "Successfully Registered!";
 			$_SESSION['MESSAGE_TYPE'] = "alert-success";
 			$_SESSION['username'] = $username;
@@ -40,40 +39,24 @@ if (isset($_POST['username'])){
 <body>
 	<?php include("navbar.php"); ?>
 	<div class="wrapper">
-	<div class="container form-signin">
+		<div class="container form-signin">
+			<?php include("message.php"); ?>
 
-		<?php
-			echo '<div class="alert '; 
-			if (!empty($_SESSION['MESSAGE_TYPE'])) {
-				echo $_SESSION['MESSAGE_TYPE'];
-				unset($_SESSION['MESSAGE_TYPE']);
-			}
-			else{
-				echo '"alert-warning"';
-			}
-			echo '" role="alert">';
-				if (!empty($_SESSION['MESSAGE'])) {
-				echo $_SESSION['MESSAGE'];
-				unset($_SESSION['MESSAGE']);
-			}
-			echo '</div>';
-		?>
+			<form method="post" action="register.php">
+				<h2 class="form-signin-heading">Register</h2>
 
-		<form method="post" action="register.php">
-			<h2 class="form-signin-heading">Register</h2>
+				<label for="id_username" class="sr-only">Username</label>
+				<input type="text" name="username" id="id_username" class="form-control" maxlength="254" placeholder="Username" required autofocus>
 
-			<label for="id_username" class="sr-only">Username</label>
-			<input type="text" name="username" id="id_username" class="form-control" maxlength="254" placeholder="Username" required autofocus>
+				<label for="id_password" class="sr-only">Password</label>
+				<input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
 
-			<label for="id_password" class="sr-only">Password</label>
-			<input type="password" name="password" id="id_password" class="form-control" placeholder="Password" required>
+				<label for="id_confirm_password" class="sr-only">Confirm Password</label>
+				<input type="password" name="confirm_password" id="id_confirm_password" class="form-control" placeholder="Confirm Password" required>
 
-			<label for="id_confirm_password" class="sr-only">Confirm Password</label>
-			<input type="password" name="confirm_password" id="id_confirm_password" class="form-control" placeholder="Confirm Password" required>
-
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-		</form>
-	</div>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+			</form>
+		</div>
 	</div>
 	<?php include("scripts.html"); ?>
 </body>

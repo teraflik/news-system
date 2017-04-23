@@ -3,8 +3,8 @@ $DB_SERVER = "localhost";
 $DB_USER = "root";
 $DB_PASS = "";
 $DB_NAME = "news";
-
 $DEBUG = 0;
+session_start();
 
 /* Connect to MySQL database using above credentials. */
 $link = new mysqli($DB_SERVER, $DB_USER, $DB_PASS);
@@ -14,15 +14,15 @@ if ($link->connect_errno) {
 }
 
 if ( $link->select_db($DB_NAME) ){
-	$_SESSION['log'] = "<strong>Message: </strong>Database Selected!";
+	$server_log = "<strong>Message: </strong>Database Selected!";
 }
 else{
 	$sql = 'CREATE DATABASE '.$DB_NAME;
 	if ($link->query($sql) === TRUE) {
-		$_SESSION['log'] = "<strong>Message: </strong>Database Created!";
+		$server_log = "<strong>Message: </strong>Database Created!";
 	}
 	else{
-		$_SESSION['log'] = "<strong>Error: </strong>".$link->error;
+		$server_log = "<strong>Error: </strong>".$link->error;
 	}
 }
 
@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `news` (
 	PRIMARY KEY(`newsID`)
 );
 CREATE TABLE IF NOT EXISTS `user` (
-	`userID` INT(7) AUTO_INCREMENT,
-	`username` VARCHAR(255) NOT NULL,
+	`userID` VARCHAR AUTO_INCREMENT,
+	`username` VARCHAR(255) UNIQUE NOT NULL,
 	`password` VARCHAR(50) NOT NULL,
 	 PRIMARY KEY(`userID`)
 ); 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
 	FOREIGN KEY (`newsID`) REFERENCES `news`(`newsID`) ON UPDATE CASCADE ON DELETE CASCADE,
 	PRIMARY KEY(`commentID`)
 );
-CREATE TABLE `rating` (
+CREATE TABLE IF NOT EXISTS `rating` (
 	`userID` INT(7),
 	`newsID` INT(7),
 	`rating` TINYINT(4),
@@ -78,11 +78,11 @@ CREATE TABLE IF NOT EXISTS `newsCategory` (
 ";
 
 if ($link->multi_query($tables)) {
-	$_SESSION['log'] .= "<br><strong>Message: </strong>Tables Created!";
+	$server_log .= "<br><strong>Message: </strong>Tables Created!";
 	while ($link->next_result()) {;}
 }
 else{
-	$_SESSION['log'] .= "<br><strong>Error: </strong>".mysqli_error($link);
+	$server_log .= "<br><strong>Error: </strong>".mysqli_error($link);
 }
 
 ?>

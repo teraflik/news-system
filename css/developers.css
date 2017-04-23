@@ -207,7 +207,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.container {
+.wrapper {
   max-width: 1170px;
   width: 100%;
   margin: 100px auto;
