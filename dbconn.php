@@ -37,14 +37,14 @@ CREATE TABLE IF NOT EXISTS `user` (
 `username` VARCHAR(255) NOT NULL,
 `password` VARCHAR(50) NOT NULL
 ); 
-CREATE TABLE IF NOT EXISTS `ratings` (
+CREATE TABLE IF NOT EXISTS `rating` (
 `userID` INT(5),
 `newsID` CHAR(5),
 `rating` TINYINT(4),
 `timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY  ('userID','newsID')
 );
-CREATE TABLE IF NOT EXISTS `favourites` (
+CREATE TABLE IF NOT EXISTS `favourite` (
 `userID` INT(5),
 `newsID` CHAR(5),
 PRIMARY KEY  ('userID','newsID')
