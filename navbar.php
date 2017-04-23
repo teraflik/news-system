@@ -2,7 +2,7 @@
 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<a class="navbar-brand" href="#">News Group</a>
+	<a class="navbar-brand" href="login.php"><h2>News Group</h2></a>
 	<div class="collapse navbar-collapse" id="navbarNavDropdown">
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item <?php if($page=='home') echo 'active' ?>">
@@ -21,3 +21,23 @@
 		</ul>
 	</div>
 </nav>
+
+<?php
+/*Only for debugging purposes.*/
+if($DEBUG == 1){
+	echo '
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<h3>Log:</h3>
+		<p>';
+			if( isset($_SESSION['Message']) ){
+				echo $_SESSION['Message'];
+				unset($_SESSION['Message']);
+			}
+	echo'
+		</p>
+	</div>';
+}
+?>

@@ -4,6 +4,7 @@ $DB_USER = "root";
 $DB_PASS = "";
 $DB_NAME = "news";
 $_SESSION['Message'] = "";
+$DEBUG = 0;
 
 /* Connect to MySQL database using above credentials. */
 $link = new mysqli($DB_SERVER, $DB_USER, $DB_PASS);
