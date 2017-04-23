@@ -1,10 +1,11 @@
 <?php
+session_start();
 $DB_SERVER = "localhost";
 $DB_USER = "root";
 $DB_PASS = "";
 $DB_NAME = "news";
 $DEBUG = 0;
-session_start();
+$sl = "";
 
 /* Connect to MySQL database using above credentials. */
 $link = new mysqli($DB_SERVER, $DB_USER, $DB_PASS);
@@ -14,15 +15,15 @@ if ($link->connect_errno) {
 }
 
 if ( $link->select_db($DB_NAME) ){
-	$server_log = "<strong>Message: </strong>Database Selected!";
+	$sl .= "<strong>Message: </strong>Database Selected!";
 }
 else{
-	$sql = 'CREATE DATABASE '.$DB_NAME;
+	$sl .= 'CREATE DATABASE '.$DB_NAME;
 	if ($link->query($sql) === TRUE) {
-		$server_log = "<strong>Message: </strong>Database Created!";
+		$sl .= "<strong>Message: </strong>Database Created!";
 	}
 	else{
-		$server_log = "<strong>Error: </strong>".$link->error;
+		$sl .= "<strong>Error: </strong>".$link->error;
 	}
 }
 
@@ -78,11 +79,11 @@ CREATE TABLE IF NOT EXISTS `newsCategory` (
 ";
 
 if ($link->multi_query($tables)) {
-	$server_log .= "<br><strong>Message: </strong>Tables Created!";
+	$sl .= "<br><strong>Message: </strong>Tables Created!";
 	while ($link->next_result()) {;}
 }
 else{
-	$server_log .= "<br><strong>Error: </strong>".mysqli_error($link);
+	$sl .= "<br><strong>Error: </strong>".mysqli_error($link);
 }
 
 ?>

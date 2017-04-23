@@ -1,6 +1,6 @@
 <?php
-$page = "developers";
 include "dbconn.php";
+$page = "developers";
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,10 +11,9 @@ include "dbconn.php";
     <link rel="stylesheet" href="css/developers.css">
   </head>
 <body>
-
 <?php include("navbar.php"); ?>
 
-<main class="wrapper">
+<main class="at-wrapper">
   <div class="at-section">
     <div class="at-section__title">Developers</div>
   </div>

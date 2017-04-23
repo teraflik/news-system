@@ -1,6 +1,7 @@
 <?php
 $page = "register"; 
 include "dbconn.php";
+
 if (isset($_POST['username'])){
 	$username = stripslashes($_POST['username']);
 	$username = $link->real_escape_string($username);
@@ -19,10 +20,11 @@ if (isset($_POST['username'])){
 			$_SESSION['MESSAGE_TYPE'] = "alert-success";
 			$_SESSION['username'] = $username;
 			header("Location: index.php");
+			exit();
  		}
 		else{
-			$_SESSION['MESSAGE'] = "Error: ".$link->error;
-			$_SESSION['MESSAGE_TYPE'] = "alert-warning";
+			$_SESSION['MESSAGE'] = "Error: ".$link->error." !";
+			$_SESSION['MESSAGE_TYPE'] = "alert-danger";
 		}
 	}
 }

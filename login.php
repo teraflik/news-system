@@ -1,6 +1,6 @@
 <?php
-$page = "login";
 include "dbconn.php";
+$page = "login";
 
 if ( isset($_POST['username']) ){
     $username = stripslashes($_POST['username']);
@@ -13,6 +13,7 @@ if ( isset($_POST['username']) ){
     if($rows == 1){
         $_SESSION['username'] = $username;
         header("Location: index.php");
+        exit();
     }
     else{
         $_SESSION['MESSAGE'] = "Invalid Username or Password!";

@@ -1,7 +1,7 @@
 <?php
-if (!empty($_SESSION['MESSAGE'])) {
+if (isset($_SESSION['MESSAGE'])) {
     echo '<div class="alert '; 
-    if (!empty($_SESSION['MESSAGE_TYPE'])) {
+    if (isset($_SESSION['MESSAGE_TYPE'])) {
         echo $_SESSION['MESSAGE_TYPE'];
         unset($_SESSION['MESSAGE_TYPE']);
     }
@@ -9,7 +9,7 @@ if (!empty($_SESSION['MESSAGE'])) {
         echo 'alert-warning';
     }
     echo '" role="alert">';
-    if (!empty($_SESSION['MESSAGE'])) {
+    if (isset($_SESSION['MESSAGE'])) {
         echo $_SESSION['MESSAGE'];
         unset($_SESSION['MESSAGE']);
     }
