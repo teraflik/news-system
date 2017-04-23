@@ -1,7 +1,30 @@
 <?php
 $page = "register"; 
 include "dbconn.php";
+if (isset($_REQUEST['username'])){
+	$username = stripslashes($_REQUEST['username']); // removes backslashes
+	$username = $link->real_escape_string($con,$username);  //escapes special characters in a string
+	$password = stripslashes($_REQUEST['password']);
+	$password = $link->real_escape_string($con,$password);
+	$confirmPassword = stripslashes($_REQUEST['confirm_password']);
+	$confirmPassword = $link->real_escape_string($con,$confirmPassword);
+	if($password != $confirmPassword){
+		$MESSAGE = "Passwords do not match!";
+	}
+	else{
+		$query = "INSERT into `users` (`username`, `password`) VALUES ('$username', '$password')";
+		if( $link->query($query) ){
+			$MESSAGE = "Successfully Registered!";
+			session_start();
+			header("Location: index.php");
+ 		}
+		else{
+			$MESSAGE = "";
+		}
+	}
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

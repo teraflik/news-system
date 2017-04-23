@@ -11,6 +11,10 @@
 			<li class="nav-item <?php if($page=='developers') echo 'active' ?>">
 				<a class="nav-link" href="developers.php">Developers</a>
 			</li>
+			<?php 
+				session_start();
+				if( isset($_SESSION["username"]) ){
+			?>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User Name</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -18,6 +22,15 @@
 					<a class="dropdown-item" href="#">Logout</a>
 				</div>
 			</li>
+			<?php
+				}
+				else {
+					echo '
+					<li class="nav-item '; if($page=="register") echo 'active'; echo'">
+					<a class="nav-link" href="register.php">Register</a>
+					</li>';
+				}  
+			?>
 		</ul>
 	</div>
 </nav>
