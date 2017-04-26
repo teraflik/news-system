@@ -12,24 +12,28 @@
 				<li class="nav-item <?php if($page=='developers') echo 'active' ?>">
 					<a class="nav-link" href="developers.php">Developers</a>
 				</li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
 				<?php 
 					if( isset($_SESSION['username']) ){
 				?>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['username']; ?></a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="favourites.php">Favourites</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="logout.php">Logout</a>
-					</div>
+				<li class="nav-item">
+					<a class="nav-link" href="profile.php"> <?php echo $_SESSION['username'];?> </a>
 				</li>
+				<li class="nav-item <?php if($page=='favourites') echo 'active' ?>">
+					<a class="nav-link" href="favoutires.php">Favourites</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="logout.php">Logout</a>
+				</li>
+
 				<?php
 					}
 					else {
-						echo '
-						<li class="nav-item '; if($page=="register") echo 'active'; echo'">
-						<a class="nav-link" href="register.php">Register</a>
-						</li>';
+					echo '
+					<li class="nav-item '; if($page=="register") echo 'active'; echo'">
+					<a class="nav-link" href="register.php">Register</a>
+					</li>';
 					}  
 				?>
 			</ul>

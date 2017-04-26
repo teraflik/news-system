@@ -13,12 +13,12 @@ if( !isset($_SESSION['username']) ){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<?php include("header.html"); ?>
+	<?php include("includes/header.html"); ?>
 	<title>News Group</title>
 </head>
 
 <body>
-	<?php include("navbar.php"); ?>	
+	<?php include("includes/navbar.php"); ?>	
 	<div class="container">
 		<?php include("message.php"); ?>
 		<div class="jumbotron">
@@ -32,7 +32,7 @@ if( !isset($_SESSION['username']) ){
 			</div>
 		</div>
 	</div>
-	<?php include("scripts.html"); ?>
+	<?php include("includes/scripts.html"); ?>
 </body>
 
 </html>

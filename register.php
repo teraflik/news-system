@@ -33,13 +33,13 @@ if (isset($_POST['username'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<?php include("header.html"); ?>
+	<?php include("includes/header.html"); ?>
     <link rel="stylesheet" href="css/login.css">
 	<title>Register - News Group</title>
 </head>
 
 <body>
-	<?php include("navbar.php"); ?>
+	<?php include("includes/navbar.php"); ?>
 	<div class="wrapper">
 		<div class="container form-signin">
 			<?php include("message.php"); ?>
@@ -60,7 +60,7 @@ if (isset($_POST['username'])){
 			</form>
 		</div>
 	</div>
-	<?php include("scripts.html"); ?>
+	<?php include("includes/scripts.html"); ?>
 </body>
 
 </html>

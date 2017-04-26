@@ -31,7 +31,9 @@ $tables =
 "
 CREATE TABLE IF NOT EXISTS `news` (
 	`newsID` INT(7) AUTO_INCREMENT,
-	`news` TEXT NOT NULL,
+	`title` VARCHAR(255),
+	`post` TEXT NOT NULL,
+	`timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(`newsID`)
 );
 CREATE TABLE IF NOT EXISTS `user` (
