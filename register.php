@@ -1,6 +1,6 @@
 <?php
+require('includes/dbconn.php');
 $page = "register"; 
-include "dbconn.php";
 
 if (isset($_POST['username'])){
 	$username = stripslashes($_POST['username']);
@@ -42,7 +42,7 @@ if (isset($_POST['username'])){
 	<?php include("includes/navbar.php"); ?>
 	<div class="wrapper">
 		<div class="container form-signin">
-			<?php include("message.php"); ?>
+			<?php include("includes/message.php"); ?>
 
 			<form method="post" action="register.php">
 				<h2 class="form-signin-heading">Register</h2>

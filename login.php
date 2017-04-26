@@ -1,5 +1,5 @@
 <?php
-include "includes/dbconn.php";
+require('includes/dbconn.php');
 $page = "login";
 
 if ( isset($_POST['username']) ){
@@ -34,7 +34,7 @@ if ( isset($_POST['username']) ){
 	<?php include("includes/navbar.php"); ?>
     <div class="wrapper">
         <div class="container form-signin">
-            <?php include("message.php"); ?>
+            <?php include("includes/message.php"); ?>
             <form method="post" action="login.php">
                 <h2 class="form-signin-heading">Sign In</h2>
 

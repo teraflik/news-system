@@ -1,5 +1,27 @@
 <?php
 
+function GetBlogPosts($inNewsID=null, $inCategoryID=null)
+{
+    if (!empty($inNewsID)){
+        $query = "SELECT * FROM `news` WHERE `newsID`=" . $inNewsID . " ORDER BY `timestamp` DESC"; 
+    }
+    else if (!empty($inCategoryID)){
+        $query = "SELECT `news`.* FROM `newsCategory` LEFT JOIN (`news`) ON (newsCategory.`newsID` = news.`newsID`) WHERE newsCategory.`categoryID` =" . $inCategoryID . " ORDER BY `news`.`timestamp` DESC";
+    }
+    else {
+        $query = "SELECT * FROM `news` ORDER BY `timestamp` DESC";
+    }
+ 	$result = $link->query($query) or die($link->error());
+
+    $newsArray = array();
+    while ($row = $result->fetch_assoc() )
+    {
+        $myPost = new News($row["id"], $row['title'], $row['post'], $row["author_id"], $row['dateposted']);
+        array_push($postArray, $myPost);
+    }
+    return $postArray;
+}
+
 function insert_rating($conn,$resid,$rating){
 	
 	$currdate = date('d-m-Y');
