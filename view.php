@@ -2,24 +2,13 @@
 require('includes/dbconn.php'); 
 $page="view";
 
-$stmt = $db->prepare('SELECT postID, postTitle, postCont, postDate FROM blog_posts WHERE postID = :postID');
-$stmt->execute(array(':postID' => $_GET['id']));
-$row = $stmt->fetch();
-
-//if post does not exists redirect user.
-if($row['postID'] == ''){
-    header('Location: ./');
-    exit;
-}
+//if post does not exists redirect user
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Blog - <?php echo $row['postTitle'];?></title>
-    <link rel="stylesheet" href="style/normalize.css">
-    <link rel="stylesheet" href="style/main.css">
+   
 </head>
 <body>
 

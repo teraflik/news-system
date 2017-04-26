@@ -3,3 +3,30 @@ body {
 	color: #333;
     padding-top: 70px;
 }
+
+.newsclass{
+    box-shadow: 2px 2px 2px 2px grey;
+    padding: 10px;
+    margin: 24px;
+}
+
+h1 {
+    padding-bottom: 10px;
+}
+
+.imgclass{
+    
+    max-width: 100%;
+    padding-bottom: 8px;
+}
+
+.post{
+    text-align: right;
+    font-size: 10px;
+}
+
+.post-left {
+    
+    font-size: 14px;
+    font-weight: bold;
+}

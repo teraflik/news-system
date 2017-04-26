@@ -40,6 +40,9 @@ CREATE TABLE IF NOT EXISTS `news` (
 	`newsID` INT(7) AUTO_INCREMENT,
 	`title` VARCHAR(255),
 	`post` TEXT,
+	`link` TEXT,
+	`image` TEXT,
+	`category` VARCHAR(200),
 	`timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(`newsID`)
 );
@@ -96,4 +99,5 @@ else{
 	$sl .= "<strong>Error: </strong><br>".mysqli_error($link);
 }
 
+//echo $sl;
 ?>

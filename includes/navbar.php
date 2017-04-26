@@ -18,7 +18,7 @@
 					if( isset($_SESSION['username']) ){
 				?>
 				<li class="nav-item">
-					<a class="nav-link" href="profile.php"> <?php echo $_SESSION['username'];?> </a>
+					<a class="nav-link"> Welcome <?php echo $_SESSION['username'];?> </a>
 				</li>
 				<li class="nav-item <?php if($page=='favourites') echo 'active' ?>">
 					<a class="nav-link" href="favoutires.php">Favourites</a>
