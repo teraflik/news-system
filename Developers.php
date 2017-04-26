@@ -1,6 +1,7 @@
 <?php
-include "dbconn.php";
+require('includes/dbconn.php');
 $page = "developers";
+
 ?>
 <!DOCTYPE html>
 <html>
