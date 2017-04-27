@@ -58,7 +58,9 @@ if (isset($_POST['username'])){
 
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 			</form>
+			<div align="right"><a href="login.php">Already have an account?</a></div>
 		</div>
+
 	</div>
 	<?php include("includes/scripts.html"); ?>
 </body>

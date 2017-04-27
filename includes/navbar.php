@@ -10,7 +10,7 @@
 					<a class="nav-link" href="index.php">Home</a>
 				</li>
 				<li class="nav-item <?php if($page=='developers') echo 'active' ?>">
-					<a class="nav-link" href="developers.php">Developers</a>
+					<a class="nav-link" href="developers.php">Our Team</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
