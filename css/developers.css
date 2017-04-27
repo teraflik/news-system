@@ -20,7 +20,7 @@
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
-  background: #FFF;
+  background: #eee;
   border: 1px solid #E2E9ED;
 }
 .at-grid[data-column="1"] .at-column {
@@ -98,7 +98,7 @@
 .at-column {
   z-index: 0;
   position: relative;
-  background: #FFF;
+  background: #fff;
   box-shadow: 0 0 0 1px #E2E9ED;
   padding: 10px;
   box-sizing: border-box;

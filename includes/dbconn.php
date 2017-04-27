@@ -62,32 +62,12 @@ CREATE TABLE IF NOT EXISTS `comment` (
 	FOREIGN KEY (`newsID`) REFERENCES `news`(`newsID`) ON UPDATE CASCADE ON DELETE CASCADE,
 	PRIMARY KEY(`commentID`)
 );
-CREATE TABLE IF NOT EXISTS `rating` (
-	`userID` INT(7),
-	`newsID` INT(7),
-	`rating` TINYINT(4),
-	`timestamp` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	FOREIGN KEY (`userID`) REFERENCES `user`(`userID`) ON UPDATE CASCADE ON DELETE CASCADE,
-	FOREIGN KEY (`newsID`) REFERENCES `news`(`newsID`) ON UPDATE CASCADE ON DELETE CASCADE,
-	PRIMARY KEY  (`userID`,`newsID`)
-);
 CREATE TABLE IF NOT EXISTS `favourite` (
 	`userID` INT(7),
 	`newsID` INT(7),
 	FOREIGN KEY (`userID`) REFERENCES `user`(`userID`) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (`newsID`) REFERENCES `news`(`newsID`) ON UPDATE CASCADE ON DELETE CASCADE,
 	PRIMARY KEY  (`userID`,`newsID`)
-);
-CREATE TABLE IF NOT EXISTS `category` (
-	`categoryID` INT(7) PRIMARY KEY AUTO_INCREMENT,
-	`name` CHAR(50)
-);
-CREATE TABLE IF NOT EXISTS `newsCategory` (
-	`newsID` INT(7),
-	`categoryID` INT(7),
-	FOREIGN KEY (`newsID`) REFERENCES `news`(`newsID`) ON UPDATE CASCADE ON DELETE CASCADE,
-	FOREIGN KEY (`categoryID`) REFERENCES `category`(`categoryID`) ON UPDATE CASCADE ON DELETE CASCADE,
-	PRIMARY KEY  (`newsID`,`categoryID`)
 );
 ";
 
@@ -99,5 +79,4 @@ else{
 	$sl .= "<strong>Error: </strong><br>".mysqli_error($link);
 }
 
-//echo $sl;
 ?>
