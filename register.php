@@ -45,7 +45,7 @@ if (isset($_POST['username'])){
 			<?php include("includes/message.php"); ?>
 
 			<form method="post" action="register.php">
-				<h2 class="form-signin-heading">Register</h2>
+				<h2 class="form-signin-heading text-white">Register</h2>
 
 				<label for="id_username" class="sr-only">Username</label>
 				<input type="text" name="username" id="id_username" class="form-control" maxlength="254" placeholder="Username" required autofocus>
@@ -58,7 +58,7 @@ if (isset($_POST['username'])){
 
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 			</form>
-			<div align="right"><a href="login.php">Already have an account?</a></div>
+			<div align="right"><a href="login.php">Already have an account? Login Here</a></div>
 		</div>
 
 	</div>

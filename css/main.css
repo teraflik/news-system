@@ -1,5 +1,52 @@
 body {
-    background-color: #eee;
-	color: #333;
-    padding-top: 70px;
+    background-color: rgba(0,0,0,0.90);
+	color: rgba(255,255,255,.65);
+    padding-top: 80px;
+    font-family: 'Roboto'!important;
+}
+
+.card{
+    background-color: rgba(0,0,0,0.95);
+    border: solid 2px rgb(0,0,0);
+    border-radius: 0;
+    zoom: 90%;
+}
+
+.card-title a {
+    text-decoration: none;
+    color: white;
+}
+
+.card-title a:hover {
+    color: rgba(255,255,255,.65);
+}
+
+.navbar {
+   background-color: black;
+}
+
+.nav-gradient{
+    height: 4px;
+    background:
+    linear-gradient(
+      to left, 
+      rgba(0,0,0,1) 0%,
+      rgba(2, 157, 225, 1) 50%,
+      rgba(0,0,0,1) 100%
+    )
+    left bottom #777 no-repeat; 
+    overflow: auto;
+    position: fixed;
+    top: 56px;
+    width: 100%;
+    z-index: 10;
+}
+
+.card-imgclass {
+    height: 240px;
+}
+
+.news-category {
+    font-weight: bold;
+    color: rgb(220, 220, 220);
 }

@@ -30,18 +30,18 @@ if ( isset($_POST['username']) ){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<?php include("includes/header.html"); ?>
+    <?php include("includes/header.html"); ?>
     <link rel="stylesheet" href="css/login.css">
-	<title>News Group</title>
+    <title>News Group</title>
 </head>
 
 <body>
-	<?php include("includes/navbar.php"); ?>
+    <?php include("includes/navbar.php"); ?>
     <div class="wrapper">
         <div class="container form-signin">
             <?php include("includes/message.php"); ?>
             <form method="post" action="login.php">
-                <h2 class="form-signin-heading">Sign In</h2>
+                <h2 class="form-signin-heading text-white">Sign In</h2>
 
                 <label for="id_username" class="sr-only">Username</label>
                 <input type="text" name="username" id="id_username" class="form-control" maxlength="254" placeholder="Username" required autofocus>
@@ -51,10 +51,10 @@ if ( isset($_POST['username']) ){
 
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
             </form>
-
+            <div align="right"><a href="register.php">New User? Register Here</a></div>
         </div>
     </div>
-	<?php include("includes/scripts.html"); ?>
+    <?php include("includes/scripts.html"); ?>
 </body>
 
 </html>

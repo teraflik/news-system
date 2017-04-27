@@ -24,34 +24,42 @@ $result = $link->query('SELECT `newsID`, `title`, `post`, `link`, `image`, `cate
 	<?php include("includes/navbar.php"); ?>    
 	<div class="container">
 	<div class="row">
-	<div class="col-sm-2">
+	<div class="col-sm-0">
 	</div>
-	<div class="col-sm-10">
+	<div class="col-sm-12 divclass">
 		<?php include("includes/message.php"); ?>
-		<div class="card-columns">
+		
 		<?php
+		$i = 1;
 		while($row = $result->fetch_assoc()){
-			echo '<div class="card">';
-				echo '<div class="card-header">';
-					echo '<small class="text-muted">'.ucfirst($row['category']).'</small>';
+			if($i%3==1) {
+				echo '<div class="card-deck">';
+			}
+			echo '<div class="card card-inverse">';
+				echo '<div class="card-header news-category">';
+					echo '<small class="catclass">#'.ucfirst($row['category']).'</small>';
 				echo '</div>';
-				echo '<img class="card-img-top img-fluid" src="'.$row['image'].'" />';
+				echo '<img class="card-img-top img-fluid card-imgclass" src="'.$row['image'].'" />';
 				echo '<div class="card-block">';
 					echo '<h4 class="card-title"><a href="view.php?id='.$row['newsID'].'">'.$row['title'].'</a></h4>';
-					echo '<p class="card-subtitle mb-2 text-muted">Posted on '.date('jS M Y H:i', strtotime($row['timestamp'])).'</p>';
+					echo '<small class="card-subtitle mb-2 text-muted text-right">'.date('jS M Y H:i', strtotime($row['timestamp'])).'</small>';
 					echo '<p class="card-text">'.$row['post'].'</p>';
 				echo '</div>';
-				echo '<div class="card-block text-right">';
+				echo '<div class="card-footer text-right">';
 					echo '<div class="btn-group" role="group">';
-					echo '<a class="btn btn-outline-primary btn-sm" href="'.$row['link'].'">Read More</a>';
+					echo '<a class="btn btn-outline-primary btn-sm aclass" href="'.$row['link'].'">Read More</a>';
 					echo '<a class="btn btn-outline-danger btn-sm" href="'.$row['link'].'"><i class="fa fa-star-o"></i></a>';
 					echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-share-alt"></i></a>';
 					echo '</div>';
 				echo '</div>';
 			echo '</div>';
+			if($i%3==0) {
+				echo '</div><br>';
+			}
+			$i++;
 		}
 		?>
-		</div>
+		
 	</div>
 	<?php include("includes/scripts.html"); ?>
 </body>

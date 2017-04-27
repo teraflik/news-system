@@ -1,11 +1,17 @@
 <?php
 
 function fetchNews($link, $category = null){
-	$s = array("india" => array("the-times-of-india", "the-hindu"),
-			"world"  => array("bbc-news"),
-			"sports" => array("espn"),
-			"technology" => array("techradar"),
-			"entertainment" => array("buzzfeed")
+	$s =
+	array("india" => array("the-hindu"),
+			"world"  => array("bbc-news","al-jazeera-english","associated-press","bbc"),
+			"sports" => array("espn","espn-cric-info","bbc-sport","football-italia","fourfourtwo","fox-sports","talksport","the-sport-bible"),
+			"technology" => array("techradar","ars-technica","engadget","gruenderszene","hacker-news","recode","t3n","techcrunch","the-verge","wired.de"),
+			"entertainment" => array("buzzfeed","daily-mail","entertainment-weekly","mashable","the-lad-bible"),
+			"business" => array("business-insider","bloomberg","cnbc","die-zeit","financial-times","handelsblatt","the-economist","the-wall-street-journal","wirtschafts-woche"),
+			"politics" => array("breitbart-news"),
+			"gaming" => array("ign","polygon"),
+			"music" => array("mtv-news"),
+			"science-and-nature" => array("national-geographic","new-scientist"),
 			);
 
 	if(empty($category)){
