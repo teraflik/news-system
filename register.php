@@ -2,6 +2,11 @@
 require('includes/dbconn.php');
 $page = "register"; 
 
+if( isset($_SESSION['username']) ){
+    header("Location: index.php");
+    exit();
+}
+
 if (isset($_POST['username'])){
 	$username = stripslashes($_POST['username']);
 	$username = $link->real_escape_string($username);

@@ -47,7 +47,7 @@ function callNews($url, $category, $link){
 		}
 	}
 }
-
+/*
 function getNews($inNewsID=null, $inCategoryID=null)
 {
 	if (!empty($inNewsID)){
@@ -69,5 +69,5 @@ function getNews($inNewsID=null, $inCategoryID=null)
 	}
 	return $postArray;
 }
-
+*/
 ?>

@@ -41,7 +41,7 @@ $result = $link->query('SELECT `newsID`, `title`, `post`, `link`, `image`, `cate
 				echo '</div>';
 				echo '<img class="card-img-top img-fluid card-imgclass" src="'.$row['image'].'" />';
 				echo '<div class="card-block">';
-					echo '<h4 class="card-title"><a href="view.php?id='.$row['newsID'].'">'.$row['title'].'</a></h4>';
+					echo '<h4 class="card-title"><a href="#" class="modal-toggle" data-toggle="modal" data-target="#newsModal" data-id="'.$row['newsID'].'">'.$row['title'].'</a></h4>';
 					echo '<small class="card-subtitle mb-2 text-muted text-right">'.date('jS M Y H:i', strtotime($row['timestamp'])).'</small>';
 					echo '<p class="card-text">'.$row['post'].'</p>';
 				echo '</div>';

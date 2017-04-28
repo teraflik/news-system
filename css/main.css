@@ -5,11 +5,15 @@ body {
     font-family: 'Roboto'!important;
 }
 
-.card{
+.card {
     background-color: rgba(0,0,0,0.95);
     border: solid 2px rgb(0,0,0);
     border-radius: 0;
     zoom: 90%;
+}
+
+.modal-content{
+    background-color: rgb(0,0,0);
 }
 
 .card-title a {
