@@ -1,76 +1,84 @@
 <?php
 require('includes/dbconn.php');
 $page = "view";
-
+ini_set('max_execution_time', 300);
 if ( isset($_GET['id']) ){
 	$newsID = $_GET['id'];
 	$userID = $_SESSION['userID'];
 
-	if( isset($_POST['comment']) ){
-		$txt = stripslashes($_POST['comment']);
-    	$txt = $link->real_escape_string($txt);
-    	$link->query('INSERT into `comment` (`userID`, `newsID`, `comment`) VALUES ('.$userID.', '.$newsID.', "'.$txt.'")') or die($link->error);
-	}
 	$result = $link->query('SELECT `newsID`, `title`, `post`, `link`, `image`, `category`, `timestamp` FROM `news` WHERE `newsID`='.$newsID) or die($link->error);
-
+	$a = $link->query("SELECT COUNT(*) as quant FROM favourite WHERE newsID = '$newsID'") or die($link->error);
+	$num1 = $a->fetch_assoc()['quant'];
+	$a = $link->query("SELECT COUNT(*) as quant FROM favourite where newsID='$newsID' && userID = '$userID'") or die($link->error);
+	$num2 = $a->fetch_assoc()['quant'];
 	$found = 1;
 	if($result->num_rows == 0){
 		$_SESSION['MESSAGE'] = "Error! Item does not exist!";
 		$_SESSION['MESSAGE_TYPE'] = "alert-warning";
 		$found = 0;
 	}
-	$row = $result->fetch_assoc();
-	$comments = $link->query('SELECT u.`username`, comment.`comment`, comment.`timestamp` FROM user as u, comment JOIN news ON news.`newsID` = comment.`newsID` INNER JOIN user ON user.userID = comment.userID WHERE news.newsID ='.$newsID.' ORDER BY comment.`timestamp` DESC') or die($link->error);
+	$news = $result->fetch_assoc();
+	$comments = $link->query("SELECT u.`username`, c.`comment`, c.`timestamp` FROM user u, comment c WHERE c.`newsID` = '$newsID' AND u.`userID` = c.`userID` ORDER BY c.`timestamp`") or die($link->error);
 }
 
 if($found){
 echo '
+</script>
 <div class="modal-dialog modal-lg" role="document">
 	<div class="modal-content">
-		<div class="modal-header">
-			<h5 class="modal-title">'.$row['title'].'</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
 		<div class="modal-body">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-7">
-						<img class="img-fluid" src="'.$row['image'].'" height="400"/>
-						<div class=""><p>Posted on '.date('jS M Y H:i', strtotime($row['timestamp'])).'</p></div>
-						<div class=""><p>'.$row['category'].'</p></div>
-						<p>'.$row['post'].'</p>
-					</div>
-					<div class="col-5">
-						<h3> Comments </h3>';
-						if($comments->num_rows){
-							while($comment = $comments->fetch_assoc()){
-								echo '<p><b>'.$comment['username'].'</b>: '.$comment['comment'].' on '.$comment['timestamp'].'</p>';
-							}
+		<div class="row">
+			<div class="col-sm-7">';
+				echo '<div class="card card-inverse">';
+					echo '<div class="card-header news-category">';
+						echo '<small class="catclass">#'.ucfirst($news['category']).'</small>';
+					echo '</div>';
+					echo '<img class="card-img-top img-fluid" src="'.$news['image'].'" />';
+					echo '<div class="card-block">';
+						echo '<h4 class="card-title"><a href="#" class="modal-toggle" data-toggle="modal" data-target="#newsModal" data-id="'.$news['newsID'].'">'.$news['title'].'</a></h4>';
+						echo '<small class="card-subtitle mb-2 text-muted text-right">'.date('jS M Y H:i', strtotime($news['timestamp'])).'</small>';
+						echo '<p class="card-text">'.$news['post'].'</p>';
+					echo '</div>';
+					echo '<div class="card-footer text-right">';
+						echo '<div class="btn-group" role="group">';
+						echo '<a class="btn btn-outline-primary btn-sm" href="'.$news['link'].'" target="_blank"">Read More</a>';
+						if($num2 == 0) {
+							echo '<a href="#" class="btn btn-outline-danger btn-sm favourite" data-newsid="'.$news['newsID'].'"><i class="fa fa-star-o"></i> '.$num1.'</a>';						
+						} else if($num2 == 1){
+							echo '<a href="#" class="btn btn-outline-danger btn-sm favourite" data-newsid="'.$news['newsID'].'"><i class="fa fa-star"></i> '.$num1.'</a>';						
 						}
-						else{
-							echo 'No Comments!';
-						}
-	echo'					<form class="form-inline" method="post" action="">
-							<div class="input-group">
-								
-								<textarea name="comment" id="commentBox" class="form-control" placeholder="Say something..."></textarea>
-								<button type="submit" data-id="'.$newsID.'" class="btn btn-primary submit-comment">Submit</button>
-
+						echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-share-alt"></i></a>';
+						echo '</div>';
+					echo '</div>';
+				echo '</div>';
+			echo'</div>
+			<div class="col-sm-5">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<i class="fa fa-times text-white"></i>
+				</button>
+				<h4>Comments</h4>
+				<div class="list-group commentclass">';
+				while($comment = $comments->fetch_assoc()){
+					echo '<div class="list-group-item list-group-item-action flex-column align-items-start">
+							<div class="d-flex w-100 justify-content-between">
+								<h5 class="mb-1">'.$comment['username'].'</h5>
+								<small>'.date('jS M Y H:i', strtotime($comment['timestamp'])).'</small>
 							</div>
-						</form>
-					</div>
+							<p class="mb-1">'.$comment['comment'].'</p>
+						</div>';
+				}
+				echo'</div>
+				<div>
+				
+				<input name="comment" id="commentBox" class="form-control form-control-lg" type="text" placeholder="Add comment...">
+				<button type="submit" id="submit-comment" data-newsid="'.$newsID.'" class="button button-secondary">Submit</button>
+
 				</div>
 			</div>
 		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			<a class="btn btn-primary" target="_blank" role="button" href="'.$row['link'].'">Read More</a>
 		</div>
 	</div>
-</div>';
+</div>
+';
 }
 ?>
-
-

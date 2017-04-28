@@ -24,7 +24,7 @@ $page = "developers";
 						<div class="at-user__avatar"><img src="resources/p.jpg" /></div>
 						<div class="at-user__name">Piyush Arora</div>
 						<div class="at-user__title">Front-End Developer</div>
-						<ul class="at-social">
+						<div class="at-social">
 							<li class="at-social__item">
 								<a href="https://www.facebook.com/PiyushA01">
 									<i class="fa fa-facebook-official" aria-hidden="true"></i></a>
@@ -37,7 +37,7 @@ $page = "developers";
 								<a href="https://www.linkedin.com/in/piyush-arora-091b92125">
 									<i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
 							</li>
-						</ul>
+						</div>
 					</div>
 				</div>
 				<div class="at-column">
@@ -45,7 +45,7 @@ $page = "developers";
 						<div class="at-user__avatar"><img src="resources/r.jpg" /></div>
 						<div class="at-user__name">Raghav Khandelwal</div>
 						<div class="at-user__title">Useless Fella</div>
-						<ul class="at-social">
+						<div class="at-social">
 							<li class="at-social__item">
 								<a href="https://www.facebook.com/raghavthecyberdude">
 									<i class="fa fa-facebook-official" aria-hidden="true"></i></a>
@@ -58,7 +58,7 @@ $page = "developers";
 								<a href="https://www.linkedin.com/in/raghavthecyberdude">
 									<i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
 							</li>
-						</ul>
+						</div>
 					</div>
 				</div>
 				<div class="at-column">
@@ -66,7 +66,7 @@ $page = "developers";
 						<div class="at-user__avatar"><img src="resources/h.jpg" /></div>
 						<div class="at-user__name">Harpahul Singh</div>
 						<div class="at-user__title">Back-end Developer</div>
-						<ul class="at-social">
+						<div class="at-social">
 							<li class="at-social__item">
 								<a href="https://www.facebook.com/kirihack13">
 									<i class="fa fa-facebook-official" aria-hidden="true"></i></a>
@@ -78,7 +78,7 @@ $page = "developers";
 									<a href="https://www.linkedin.com/in/harpahul-bhatia-9235b5115">
 										<i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
 								</li>
-						</ul>
+						</div>
 					</div>
 				</div>
 				<div class="at-column">
@@ -86,12 +86,12 @@ $page = "developers";
 						<div class="at-user__avatar"><img src="resources/n.jpg" /></div>
 						<div class="at-user__name">Nikunj Sharma</div>
 						<div class="at-user__title">MySQL Developer</div>
-						<ul class="at-social">
+						<div class="at-social">
 							<li class="at-social__item">
 								<a href="https://www.facebook.com/nikunjsharma008">
 									<i class="fa fa-facebook-official" aria-hidden="true"></i></a>
 							</li>
-						</ul>
+						</div>
 					</div>
 				</div>
 			</div>

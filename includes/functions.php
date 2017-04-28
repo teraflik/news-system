@@ -1,17 +1,17 @@
 <?php
-
+ini_set('max_execution_time', 300);
 function fetchNews($link, $category = null){
 	$s =
 	array("india" => array("the-hindu"),
-			"world"  => array("bbc-news","al-jazeera-english","associated-press","bbc"),
-			"sports" => array("espn","espn-cric-info","bbc-sport","football-italia","fourfourtwo","fox-sports","talksport","the-sport-bible"),
-			"technology" => array("techradar","ars-technica","engadget","gruenderszene","hacker-news","recode","t3n","techcrunch","the-verge","wired.de"),
-			"entertainment" => array("buzzfeed","daily-mail","entertainment-weekly","mashable","the-lad-bible"),
-			"business" => array("business-insider","bloomberg","cnbc","die-zeit","financial-times","handelsblatt","the-economist","the-wall-street-journal","wirtschafts-woche"),
+			"world"  => array("bbc-news","associated-press"),
+			"sports" => array("espn","espn-cric-info"),
+			"technology" => array("techradar","hacker-news"),
+			"entertainment" => array("buzzfeed","entertainment-weekly"),
+			"business" => array("cnbc","the-economist"),
 			"politics" => array("breitbart-news"),
 			"gaming" => array("ign","polygon"),
 			"music" => array("mtv-news"),
-			"science-and-nature" => array("national-geographic","new-scientist"),
+			"science" => array("national-geographic"),
 			);
 
 	if(empty($category)){

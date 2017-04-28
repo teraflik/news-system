@@ -1,7 +1,7 @@
 <?php
 require('includes/dbconn.php');
 include "includes/functions.php";
-//getNews($link);
+ini_set('max_execution_time', 300);
 $page = "home"; 
 
 if( !isset($_SESSION['username']) ){
@@ -10,7 +10,20 @@ if( !isset($_SESSION['username']) ){
 	header("Location: login.php");
 	exit();
 }
-$result = $link->query('SELECT `newsID`, `title`, `post`, `link`, `image`, `category`, `timestamp` FROM `news` ORDER BY `timestamp` DESC') or die($link->error);
+if(isset($_POST['action'])){
+	if($_POST['action'] == "refresh"){
+		fetchNews($link);
+	}
+}
+if(isset($_GET['cat'])) {
+	$category = $_GET['cat'];
+	$q = "SELECT `newsID`, `title`, `post`, `link`, `image`, `category`, `timestamp` FROM `news` WHERE `category` = LCASE('$category') ORDER BY `timestamp` DESC";
+}
+else{
+	$q = 'SELECT `newsID`, `title`, `post`, `link`, `image`, `category`, `timestamp` FROM `news` ORDER BY `timestamp` DESC';
+}
+$result = $link->query($q) or die($link->error);
+$userID = $_SESSION['userID'];
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +36,7 @@ $result = $link->query('SELECT `newsID`, `title`, `post`, `link`, `image`, `cate
 <body>
 	<?php include("includes/navbar.php"); ?>    
 	<div class="container">
-	<div class="row">
+	<div class="news">
 	<div class="col-sm-0">
 	</div>
 	<div class="col-sm-12 divclass">
@@ -31,25 +44,34 @@ $result = $link->query('SELECT `newsID`, `title`, `post`, `link`, `image`, `cate
 		
 		<?php
 		$i = 1;
-		while($row = $result->fetch_assoc()){
+		while(($news = $result->fetch_assoc()) && ($i<10)){
 			if($i%3==1) {
 				echo '<div class="card-deck">';
 			}
+			$newsID = $news['newsID'];
+			$a = $link->query("SELECT COUNT(*) as quant FROM favourite WHERE newsID = '$newsID'") or die($link->error);
+			$num1 = $a->fetch_assoc()['quant'];
+			$a = $link->query("SELECT COUNT(*) as quant FROM favourite where newsID='$newsID' && userID = '$userID'") or die($link->error);
+			$num2 = $a->fetch_assoc()['quant'];
 			echo '<div class="card card-inverse">';
 				echo '<div class="card-header news-category">';
-					echo '<small class="catclass">#'.ucfirst($row['category']).'</small>';
+					echo '<small class="catclass">#'.ucfirst($news['category']).'</small>';
 				echo '</div>';
-				echo '<img class="card-img-top img-fluid card-imgclass" src="'.$row['image'].'" />';
+				echo '<img class="card-img-top img-fluid card-imgclass" src="'.$news['image'].'" />';
 				echo '<div class="card-block">';
-					echo '<h4 class="card-title"><a href="#" class="modal-toggle" data-toggle="modal" data-target="#newsModal" data-id="'.$row['newsID'].'">'.$row['title'].'</a></h4>';
-					echo '<small class="card-subtitle mb-2 text-muted text-right">'.date('jS M Y H:i', strtotime($row['timestamp'])).'</small>';
-					echo '<p class="card-text">'.$row['post'].'</p>';
+					echo '<h4 class="card-title"><a href="#" class="modal-toggle" data-toggle="modal" data-target="#newsModal" data-id="'.$news['newsID'].'">'.$news['title'].'</a></h4>';
+					echo '<small class="card-subtitle mb-2 text-muted text-right">'.date('jS M Y H:i', strtotime($news['timestamp'])).'</small>';
+					echo '<p class="card-text">'.$news['post'].'</p>';
 				echo '</div>';
 				echo '<div class="card-footer text-right">';
 					echo '<div class="btn-group" role="group">';
-					echo '<button class="btn btn-outline-primary btn-sm href="'.$row['link'].'">Read More</a>';
-					echo '<button class="btn btn-outline-danger btn-sm favourite" data-newsid="'.$row['newsID'].'"><i class="fa fa-star-o"></i></a>';
-					echo '<button class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-share-alt"></i></a>';
+					echo '<a class="btn btn-outline-primary btn-sm" href="'.$news['link'].'" target="_blank"">Read More</a>';
+					if($num2 == 0) {
+						echo '<a href="#" class="btn btn-outline-danger btn-sm favourite" data-newsid="'.$news['newsID'].'"><i class="fa fa-star-o"></i> '.$num1.'</a>';						
+					} else if($num2 == 1){
+						echo '<a href="#" class="btn btn-outline-danger btn-sm favourite" data-newsid="'.$news['newsID'].'"><i class="fa fa-star"></i> '.$num1.'</a>';						
+					}
+					echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-share-alt"></i></a>';
 					echo '</div>';
 				echo '</div>';
 			echo '</div>';
@@ -62,6 +84,29 @@ $result = $link->query('SELECT `newsID`, `title`, `post`, `link`, `image`, `cate
 		
 	</div>
 	<?php include("includes/scripts.html"); ?>
+	<div class="right-corder-container">
+    <button class="right-corder-container-button">
+        <span class="short-text"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+        <span class="long-text">Refresh</span>
+    </button>
+	</div>
+	<div class="fnav-gradient"></div>
+	<footer class="footer footerclass">
+      <div class="container divclass2">
+      	<span class="text-muted"><a href="index.php">Top</a></span>
+        <span class="text-muted"><a href="index.php?cat=India">India</a></span>
+		<span class="text-muted"><a href="index.php?cat=World">World</a></span>
+		<span class="text-muted"><a href="index.php?cat=Sports">Sports</a></span>
+		<span class="text-muted"><a href="index.php?cat=Technology">Technology</a></span>
+		<span class="text-muted"><a href="index.php?cat=Entertainment">Entertainment</a></span>
+		<span class="text-muted"><a href="index.php?cat=Business">Business</a></span>
+		<span class="text-muted"><a href="index.php?cat=Politics">Politics</a></span>
+		<span class="text-muted"><a href="index.php?cat=Gaming">Gaming</a></span>
+		<span class="text-muted"><a href="index.php?cat=Music">Music</a></span>
+		<span class="text-muted"><a href="index.php?cat=Science">Science</a></span>
+      </div>
+    </footer>
+
 </body>
 
 </html>

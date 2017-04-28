@@ -21,10 +21,9 @@ if (isset($_POST['username'])){
 	else{
 		$query = "INSERT into `user` (`username`, `password`) VALUES ('$username', '$password')";
 		if( $link->query($query) ){
-			$_SESSION['MESSAGE'] = "Successfully Registered!";
+			$_SESSION['MESSAGE'] = "Successfully Registered! Now login here!";
 			$_SESSION['MESSAGE_TYPE'] = "alert-success";
-			$_SESSION['username'] = $username;
-			header("Location: index.php");
+			header("Location: login.php");
 			exit();
  		}
 		else{
