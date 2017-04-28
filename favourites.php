@@ -47,7 +47,7 @@ else{
 		$nrows = $result->num_rows;
 		$drows = $nrows % 3;
 		if($nrows == 0) {
-			echo '<h1 class="display-1">Seems lonely here!</h1><h1 class="display-4"><a href="index.php">Explore!</a></h1>';
+			echo '<h1 class="display-1">Seems lonely here!</h1><h1 class="display-4"><a href="index.php">Add some favourites...</a></h1>';
 		}
 		while($news = $result->fetch_assoc()){
 			if($i%3==1) {

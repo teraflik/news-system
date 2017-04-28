@@ -44,7 +44,7 @@ $page = "developers";
 					<div class="at-user">
 						<div class="at-user__avatar"><img src="resources/r.jpg" /></div>
 						<div class="at-user__name">Raghav Khandelwal</div>
-						<div class="at-user__title">Useless Fella</div>
+						<div class="at-user__title">Full Stack Developer</div>
 						<div class="at-social">
 							<li class="at-social__item">
 								<a href="https://www.facebook.com/raghavthecyberdude">
@@ -88,7 +88,7 @@ $page = "developers";
 						<div class="at-user__title">MySQL Developer</div>
 						<div class="at-social">
 							<li class="at-social__item">
-								<a href="https://www.facebook.com/nikunjsharma008">
+								<a href="https://www.facebook.com/nikunj.sharma.08">
 									<i class="fa fa-facebook-official" aria-hidden="true"></i></a>
 							</li>
 						</div>

@@ -32,6 +32,7 @@ $(document).on("click", "#submit-comment", function() {
 $(document).ready(function() {
 	$('.right-corder-container-button').click(function() {
 		$('.fa-refresh').addClass('spinclass');
+		$('.long-text').text("Refreshing...");
 		$.ajax({
 			type: "POST",
 			url: "index.php",

@@ -1,6 +1,7 @@
 <?php
 require('includes/dbconn.php');
 include "includes/functions.php";
+
 ini_set('max_execution_time', 300);
 $page = "home"; 
 
@@ -90,9 +91,9 @@ $userID = $_SESSION['userID'];
         <span class="long-text">Refresh</span>
     </button>
 	</div>
-	<div class="fnav-gradient"></div>
-	<footer class="footer footerclass">
-      <div class="container divclass2">
+	<div class="footer-gradient"></div>
+	<footer class="footer">
+      <div class="container footer-div">
       	<span class="text-muted"><a href="index.php">Top</a></span>
         <span class="text-muted"><a href="index.php?cat=India">India</a></span>
 		<span class="text-muted"><a href="index.php?cat=World">World</a></span>
