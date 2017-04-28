@@ -1,8 +1,6 @@
 <?php
 require('includes/dbconn.php');
-include "includes/functions.php";
-//getNews($link);
-$page = "home"; 
+$page = "favourites";
 
 if( !isset($_SESSION['username']) ){
 	$_SESSION['MESSAGE'] = "Please Sign In.";
@@ -10,7 +8,22 @@ if( !isset($_SESSION['username']) ){
 	header("Location: login.php");
 	exit();
 }
-$result = $link->query('SELECT `newsID`, `title`, `post`, `link`, `image`, `category`, `timestamp` FROM `news` ORDER BY `timestamp` DESC') or die($link->error);
+$userID = $_SESSION['userID'];
+
+if (isset($_POST['newsid']) ){
+	$newsID = $_POST['newsid'];
+	$action = $_POST['action'];
+	if($action == "add"){
+		$q = "INSERT INTO favourite VALUES ($userID, $newsID)";
+	}
+	else if($action == "remove"){
+		$q = "DELETE FROM favourite WHERE userID=$userID AND newsID=$newsID";
+	}
+	$link->query($q) or die($link->error);
+}
+else{
+	$result = $link->query("SELECT n.`newsID`, n.`title`, n.`post`, n.`link`, n.`image`, n.`category`, n.`timestamp` FROM `news` as n WHERE n.`newsID` IN (SELECT `favourite`.`newsID` FROM `favourite` WHERE `favourite`.`userID` = $userID") or die($link->error);
+}
 ?>
 
 <!DOCTYPE html>

@@ -15,8 +15,10 @@ if ( isset($_POST['username']) ){
     $query = "SELECT * FROM `user` WHERE `username`='$username' and `password`='$password'";
     $result = $link->query($query) or die($link->error());
     $rows = $result->num_rows;
+    $some = $result->fetch_assoc();
     if($rows == 1){
         $_SESSION['username'] = $username;
+        $_SESSION['userID'] = $some['userID'];
         header("Location: index.php");
         exit();
     }

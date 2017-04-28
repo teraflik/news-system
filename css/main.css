@@ -7,7 +7,7 @@ body {
 
 .card {
     background-color: rgba(0,0,0,0.95);
-    border: solid 2px rgb(0,0,0);
+    border: solid 2px #0275d8;
     border-radius: 0;
     zoom: 90%;
 }
@@ -35,7 +35,7 @@ body {
     linear-gradient(
       to left, 
       rgba(0,0,0,1) 0%,
-      rgba(2, 157, 225, 1) 50%,
+      #0275d8 50%,
       rgba(0,0,0,1) 100%
     )
     left bottom #777 no-repeat; 

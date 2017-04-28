@@ -4,6 +4,13 @@ $page = "view";
 
 if ( isset($_GET['id']) ){
 	$newsID = $_GET['id'];
+	$userID = $_SESSION['userID'];
+
+	if( isset($_POST['comment']) ){
+		$txt = stripslashes($_POST['comment']);
+    	$txt = $link->real_escape_string($txt);
+    	$link->query('INSERT into `comment` (`userID`, `newsID`, `comment`) VALUES ('.$userID.', '.$newsID.', "'.$txt.'")') or die($link->error);
+	}
 	$result = $link->query('SELECT `newsID`, `title`, `post`, `link`, `image`, `category`, `timestamp` FROM `news` WHERE `newsID`='.$newsID) or die($link->error);
 
 	$found = 1;
@@ -13,7 +20,7 @@ if ( isset($_GET['id']) ){
 		$found = 0;
 	}
 	$row = $result->fetch_assoc();
-	$comments = $link->query('SELECT user.`username`, comment.`comment`, comment.`timestamp` FROM user, comment JOIN news ON news.`newsID` = comment.`newsID` WHERE news.newsID ='.$newsID) or die($link->error);
+	$comments = $link->query('SELECT u.`username`, comment.`comment`, comment.`timestamp` FROM user as u, comment JOIN news ON news.`newsID` = comment.`newsID` INNER JOIN user ON user.userID = comment.userID WHERE news.newsID ='.$newsID.' ORDER BY comment.`timestamp` DESC') or die($link->error);
 }
 
 if($found){
@@ -39,17 +46,17 @@ echo '
 						<h3> Comments </h3>';
 						if($comments->num_rows){
 							while($comment = $comments->fetch_assoc()){
-								echo '<p><b>'.$comment['username'].'</b>: '.$comment['comment'].'</p>';
+								echo '<p><b>'.$comment['username'].'</b>: '.$comment['comment'].' on '.$comment['timestamp'].'</p>';
 							}
 						}
 						else{
 							echo 'No Comments!';
 						}
-	echo'					<form class="form-inline" method="post" action="view.php">
+	echo'					<form class="form-inline" method="post" action="">
 							<div class="input-group">
 								
-								<textarea name="comment" class="form-control" placeholder="Say something..."></textarea>
-								<button type="submit" class="btn btn-primary">Submit</button>
+								<textarea name="comment" id="commentBox" class="form-control" placeholder="Say something..."></textarea>
+								<button type="submit" data-id="'.$newsID.'" class="btn btn-primary submit-comment">Submit</button>
 
 							</div>
 						</form>
