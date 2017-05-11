@@ -1,6 +1,6 @@
 <?php
 require('includes/dbconn.php');
-ini_set('max_execution_time', 300);
+
 if (isset($_GET['id']) and isset($_POST['comment']) ){
 	$newsID = $_GET['id'];
 	$userID = $_SESSION['userID'];

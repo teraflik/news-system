@@ -2,7 +2,6 @@
 require('includes/dbconn.php');
 include "includes/functions.php";
 
-ini_set('max_execution_time', 300);
 $page = "home"; 
 
 if( !isset($_SESSION['username']) ){
@@ -11,11 +10,13 @@ if( !isset($_SESSION['username']) ){
 	header("Location: login.php");
 	exit();
 }
+
 if(isset($_POST['action'])){
 	if($_POST['action'] == "refresh"){
 		fetchNews($link);
 	}
 }
+
 if(isset($_GET['cat'])) {
 	$category = $_GET['cat'];
 	$q = "SELECT `newsID`, `title`, `post`, `link`, `image`, `category`, `timestamp` FROM `news` WHERE `category` = LCASE('$category') ORDER BY `timestamp` DESC";
@@ -23,6 +24,7 @@ if(isset($_GET['cat'])) {
 else{
 	$q = 'SELECT `newsID`, `title`, `post`, `link`, `image`, `category`, `timestamp` FROM `news` ORDER BY `timestamp` DESC';
 }
+
 $result = $link->query($q) or die($link->error);
 $userID = $_SESSION['userID'];
 ?>
@@ -37,18 +39,12 @@ $userID = $_SESSION['userID'];
 <body>
 	<?php include("includes/navbar.php"); ?>    
 	<div class="container">
-	<div class="news">
-	<div class="col-sm-0">
-	</div>
-	<div class="col-sm-12 divclass">
+
 		<?php include("includes/message.php"); ?>
-		
+		<div class="card-columns">
 		<?php
 		$i = 1;
 		while(($news = $result->fetch_assoc()) && ($i<37)){
-			if($i%3==1) {
-				echo '<div class="card-deck">';
-			}
 			$newsID = $news['newsID'];
 			$a = $link->query("SELECT COUNT(*) as quant FROM favourite WHERE newsID = '$newsID'") or die($link->error);
 			$num1 = $a->fetch_assoc()['quant'];
@@ -78,38 +74,34 @@ $userID = $_SESSION['userID'];
 					echo '</div>';
 				echo '</div>';
 			echo '</div>';
-			if($i%3==0) {
-				echo '</div><br>';
-			}
 			$i++;
 		}
 		?>
-		
+		</div>
 	</div>
-	<?php include("includes/scripts.html"); ?>
+	
 	<div class="right-corder-container">
-    <button class="right-corder-container-button">
-        <span class="short-text"><i class="fa fa-refresh" aria-hidden="true"></i></span>
-        <span class="long-text">Refresh</span>
-    </button>
+		<button class="right-corder-container-button">
+			<span class="short-text"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+			<span class="long-text">Refresh</span>
+		</button>
 	</div>
 	<div class="footer-gradient"></div>
 	<footer class="footer">
-      <div class="container footer-div">
-      	<span class="text-muted"><a href="index.php">Latest</a></span>
-        <span class="text-muted"><a href="index.php?cat=India">India</a></span>
-		<span class="text-muted"><a href="index.php?cat=World">World</a></span>
-		<span class="text-muted"><a href="index.php?cat=Sports">Sports</a></span>
-		<span class="text-muted"><a href="index.php?cat=Technology">Technology</a></span>
-		<span class="text-muted"><a href="index.php?cat=Entertainment">Entertainment</a></span>
-		<span class="text-muted"><a href="index.php?cat=Business">Business</a></span>
-		<span class="text-muted"><a href="index.php?cat=Politics">Politics</a></span>
-		<span class="text-muted"><a href="index.php?cat=Gaming">Gaming</a></span>
-		<span class="text-muted"><a href="index.php?cat=Music">Music</a></span>
-		<span class="text-muted"><a href="index.php?cat=Science">Science</a></span>
-      </div>
-    </footer>
-
+		<div class="container footer-div">
+			<span class="text-muted"><a href="index.php?cat=India">India</a></span>
+			<span class="text-muted"><a href="index.php?cat=World">World</a></span>
+			<span class="text-muted"><a href="index.php?cat=Sports">Sports</a></span>
+			<span class="text-muted"><a href="index.php?cat=Technology">Technology</a></span>
+			<span class="text-muted"><a href="index.php?cat=Entertainment">Entertainment</a></span>
+			<span class="text-muted"><a href="index.php?cat=Business">Business</a></span>
+			<span class="text-muted"><a href="index.php?cat=Politics">Politics</a></span>
+			<span class="text-muted"><a href="index.php?cat=Gaming">Gaming</a></span>
+			<span class="text-muted"><a href="index.php?cat=Music">Music</a></span>
+			<span class="text-muted"><a href="index.php?cat=Science">Science</a></span>
+		</div>
+	</footer>
+	<?php include("includes/scripts.html"); ?>
 </body>
 
 </html>
