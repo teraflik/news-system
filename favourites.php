@@ -38,14 +38,13 @@ else{
 	<div class="container">
 	<div class="row">
 		<?php include("includes/message.php"); ?>
-		<div class="card-columns">
 		<?php
 		$i = 1;
 		$nrows = $result->num_rows;
 		if($nrows == 0) {
 			echo '<h1 class="display-1">Seems lonely here!</h1><h1 class="display-4"><a href="index.php" style="text-decoration:none">Add some favourites...</a></h1>';
 		}
-		
+		echo'<div class="card-columns">'; 
 		while($news = $result->fetch_assoc()){
 			$newsID = $news['newsID'];
 			$a = $link->query("SELECT COUNT(*) as quant FROM favourite WHERE newsID = '$newsID'") or die($link->error);
