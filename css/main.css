@@ -1,7 +1,3 @@
-*:focus {
-	outline: none;
-}
-
 body {
 	background-color: rgba(0,0,0,0.90);
 	color: rgba(255,255,255,.65);
@@ -183,7 +179,7 @@ body {
 }
 
 .footer-div span {
-	padding: 0px 20px 10px;
+	padding: 0px 20px 5px;
 }
 .footer-div span a:hover {
 	text-decoration: none;
