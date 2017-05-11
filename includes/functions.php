@@ -1,25 +1,23 @@
 <?php
-ini_set('max_execution_time', 300);
-function fetchNews($link, $category = null){
+
+function fetchNews($link){
 	$s =
 	array("india" => array("the-hindu"),
-			"world"  => array("bbc-news","associated-press"),
-			"sports" => array("espn","espn-cric-info"),
-			"technology" => array("techradar","hacker-news"),
-			"entertainment" => array("buzzfeed","entertainment-weekly"),
-			"business" => array("cnbc","the-economist"),
+			"world"  => array("bbc-news"),
+			"sports" => array("espn"),
+			"technology" => array("techradar"),
+			"entertainment" => array("buzzfeed"),
+			"business" => array("cnbc"),
 			"politics" => array("breitbart-news"),
-			"gaming" => array("ign","polygon"),
+			"gaming" => array("ign"),
 			"music" => array("mtv-news"),
 			"science" => array("national-geographic"),
 			);
 
-	if(empty($category)){
-		foreach($s as $key =>$src){
-			foreach($src as $id){
-				$url = "https://newsapi.org/v1/articles?source=".$id."&sortBy=top&apiKey=892ae8c57aea43208cc1042d8d44b72d";
-				callNews($url, $key, $link);
-			}
+	foreach($s as $key=>$src){
+		foreach($src as $id){
+			$url = "https://newsapi.org/v1/articles?source=".$id."&sortBy=top&apiKey=892ae8c57aea43208cc1042d8d44b72d";
+			callNews($url, $key, $link);
 		}
 	}
 }			
