@@ -16,14 +16,39 @@ $page = "developers";
 	<?php include("includes/navbar.php"); ?>
 	<div class="container">
 		<div class="at-section">
-			<div class="at-section__title">Our Team</div>
+			<div class="at-section__title">Developers</div>
 		</div>
 		<div class="at-grid" data-column="4">
+			<div class="at-column">
+					<div class="at-user">
+						<div class="at-user__avatar"><img src="resources/r.jpg" /></div>
+						<div class="at-user__name">Raghav Khandelwal</div>
+						<div class="at-user__title">Full Stack Developer</div>
+						<div class="at-social">
+							<li class="at-social__item">
+								<a href="https://www.facebook.com/raghavthecyberdude">
+									<i class="fa fa-facebook-official"></i></a>
+							</li>
+							<li class="at-social__item">
+								<a href="https://twitter.com/gr8raghav">
+									<i class="fa fa-twitter"></i></a>
+							</li>
+							<li class="at-social__item">
+								<a href="https://www.linkedin.com/in/raghavthecyberdude">
+									<i class="fa fa-linkedin-square"></i></a>
+							</li>
+							<li class="at-social__item">
+								<a href="https://github.com/RaghavTheCyberdude/">
+									<i class="fa fa-github"></i></a>
+							</li>
+						</div>
+					</div>
+			</div>
 			<div class="at-column">
 				<div class="at-user">
 					<div class="at-user__avatar"><img src="resources/p.jpg" /></div>
 					<div class="at-user__name">Piyush Arora</div>
-					<div class="at-user__title">Full Stack Developer</div>
+					<div class="at-user__title">Front-end Developer</div>
 					<div class="at-social">
 						<li class="at-social__item">
 							<a href="https://www.facebook.com/PiyushA01">
@@ -44,27 +69,7 @@ $page = "developers";
 					</div>
 				</div>
 			</div>
-			<div class="at-column">
-				<div class="at-user">
-					<div class="at-user__avatar"><img src="resources/r.jpg" /></div>
-					<div class="at-user__name">Raghav Khandelwal</div>
-					<div class="at-user__title">Full Stack Developer</div>
-					<div class="at-social">
-						<li class="at-social__item">
-							<a href="https://www.facebook.com/raghavthecyberdude">
-								<i class="fa fa-facebook-official"></i></a>
-						</li>
-						<li class="at-social__item">
-							<a href="https://twitter.com/gr8raghav">
-								<i class="fa fa-twitter"></i></a>
-						</li>
-						<li class="at-social__item">
-							<a href="https://www.linkedin.com/in/raghavthecyberdude">
-								<i class="fa fa-linkedin-square"></i></a>
-						</li>
-					</div>
-				</div>
-			</div>
+			
 			<div class="at-column">
 				<div class="at-user">
 					<div class="at-user__avatar"><img src="resources/h.jpg" /></div>
