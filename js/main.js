@@ -12,7 +12,6 @@
 	});
 })(jQuery);
 
-
 $(document).on("click", "#submit-comment", function() {
 	console.log('do something');
 	var commentval = $("#commentBox").val();
@@ -25,7 +24,11 @@ $(document).on("click", "#submit-comment", function() {
 			function(data) {
 				$(".commentclass").append(data);
 			});
-
+		var num = $('.fa-comment').val();
+		num = parseInt(num);
+		num = num+1;
+		console.log('num:' + num);
+		$('.fa-comment').val(' '+num);
 	}
 });
 
