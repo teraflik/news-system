@@ -11,6 +11,8 @@ if ( isset($_GET['id']) ){
 	$num1 = $a->fetch_assoc()['quant'];
 	$a = $link->query("SELECT COUNT(*) as quant FROM favourite where newsID='$newsID' && userID = '$userID'") or die($link->error);
 	$num2 = $a->fetch_assoc()['quant'];
+	$a = $link->query("SELECT COUNT(*) as quant FROM comment WHERE newsID = '$newsID'") or die($link->error);
+	$num3 = $a->fetch_assoc()['quant'];
 	$found = 1;
 	if($result->num_rows == 0){
 		$_SESSION['MESSAGE'] = "Error! Item does not exist!";
@@ -47,17 +49,17 @@ echo '
 						} else if($num2 == 1){
 							echo '<a href="#" class="btn btn-outline-danger btn-sm favourite" data-newsid="'.$news['newsID'].'"><i class="fa fa-star"></i> '.$num1.'</a>';						
 						}
-						echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-share-alt"></i></a>';
+						echo '<a class="btn btn-outline-success btn-sm" href=""><i class="fa fa-comment" data-newsid="'.$newsID.'"> '.$num3.'</i></a>';
 						echo '</div>';
 					echo '</div>';
 				echo '</div>';
 			echo'</div>
 			<div class="col-sm-5">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" id="closebutton" data-dismiss="modal" aria-label="Close">
 					<i class="fa fa-times text-white"></i>
 				</button>
 				<h4>Comments</h4>
-				<div class="list-group commentclass">';
+				<div class="list-group commentclass" style="width: 430px;">';
 				while($comment = $comments->fetch_assoc()){
 					echo '<div class="list-group-item list-group-item-action flex-column align-items-start">
 							<div class="d-flex w-100 justify-content-between">
@@ -68,11 +70,9 @@ echo '
 						</div>';
 				}
 				echo'</div>
-				<div>
-				
-				<input name="comment" id="commentBox" class="form-control form-control-lg" type="text" placeholder="Add comment...">
-				<button type="submit" id="submit-comment" data-newsid="'.$newsID.'" class="button button-secondary">Submit</button>
-
+				<br><div class="input-group input-block-level style="position: absolute; right: 0; bottom: 0;">
+				<input name="comment" id="commentBox" class="input-group-addon" style="width: 396px; text-align:left;" type="text" placeholder="Add comment...">
+				<button type="submit" id="submit-comment" data-newsid="'.$newsID.'" class="btn btn-primary input-group-addon">Submit</button>
 				</div>
 			</div>
 		</div>

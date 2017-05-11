@@ -47,7 +47,7 @@ else{
 		$nrows = $result->num_rows;
 		$drows = $nrows % 3;
 		if($nrows == 0) {
-			echo '<h1 class="display-1">Seems lonely here!</h1><h1 class="display-4"><a href="index.php">Add some favourites...</a></h1>';
+			echo '<h1 class="display-1">Seems lonely here!</h1><h1 class="display-4"><a href="index.php" style="text-decoration:none">Add some favourites...</a></h1>';
 		}
 		while($news = $result->fetch_assoc()){
 			if($i%3==1) {
@@ -58,6 +58,8 @@ else{
 			$num1 = $a->fetch_assoc()['quant'];
 			$a = $link->query("SELECT COUNT(*) as quant FROM favourite where newsID='$newsID' && userID = '$userID'") or die($link->error);
 			$num2 = $a->fetch_assoc()['quant'];
+			$a = $link->query("SELECT COUNT(*) as quant FROM comment WHERE newsID = '$newsID'") or die($link->error);
+			$num3 = $a->fetch_assoc()['quant'];
 			echo '<div class="card card-inverse">';
 				echo '<div class="card-header news-category">';
 					echo '<small class="catclass">#'.ucfirst($news['category']).'</small>';
@@ -76,7 +78,7 @@ else{
 					} else if($num2 == 1){
 						echo '<a href="#" class="btn btn-outline-danger btn-sm favourite" data-newsid="'.$news['newsID'].'"><i class="fa fa-star"></i> '.$num1.'</a>';						
 					}
-					echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-share-alt"></i></a>';
+					echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-comment"> '.$num3.'</i></a>';
 					echo '</div>';
 				echo '</div>';
 			echo '</div>';
@@ -101,7 +103,7 @@ else{
 					} else if($num2 == 1){
 						echo '<a href="#" class="btn btn-outline-danger btn-sm favourite" data-newsid=""><i class="fa fa-star"></i></a>';						
 					}
-					echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-share-alt"></i></a>';
+					echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-comment"></i></a>';
 					echo '</div>';
 				echo '</div>';
 			echo '</div>';
@@ -123,7 +125,7 @@ else{
 					} else if($num2 == 1){
 						echo '<a href="#" class="btn btn-outline-danger btn-sm favourite" data-newsid=""><i class="fa fa-star"></i></a>';						
 					}
-					echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-share-alt"></i></a>';
+					echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-comment"></i></a>';
 					echo '</div>';
 				echo '</div>';
 			echo '</div>';
@@ -148,7 +150,7 @@ else{
 					} else if($num2 == 1){
 						echo '<a href="#" class="btn btn-outline-danger btn-sm favourite" data-newsid=""><i class="fa fa-star"></i></a>';						
 					}
-					echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-share-alt"></i></a>';
+					echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-comment"></i></a>';
 					echo '</div>';
 				echo '</div>';
 			echo '</div>';

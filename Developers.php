@@ -23,7 +23,7 @@ $page = "developers";
 					<div class="at-user">
 						<div class="at-user__avatar"><img src="resources/p.jpg" /></div>
 						<div class="at-user__name">Piyush Arora</div>
-						<div class="at-user__title">Front-End Developer</div>
+						<div class="at-user__title">Full Stack Developer</div>
 						<div class="at-social">
 							<li class="at-social__item">
 								<a href="https://www.facebook.com/PiyushA01">
@@ -34,8 +34,12 @@ $page = "developers";
 									<i class="fa fa-twitter" aria-hidden="true"></i></a>
 							</li>
 							<li class="at-social__item">
-								<a href="https://www.linkedin.com/in/piyush-arora-091b92125">
+								<a href="https://www.linkedin.com/in/piyush-arora/">
 									<i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+							</li>
+							<li class="at-social__item">
+								<a href="https://github.com/PiyushArora01/">
+									<i class="fa fa-github" aria-hidden="true"></i></a>
 							</li>
 						</div>
 					</div>
@@ -85,7 +89,7 @@ $page = "developers";
 					<div class="at-user">
 						<div class="at-user__avatar"><img src="resources/n.jpg" /></div>
 						<div class="at-user__name">Nikunj Sharma</div>
-						<div class="at-user__title">MySQL Developer</div>
+						<div class="at-user__title">Database Developer</div>
 						<div class="at-social">
 							<li class="at-social__item">
 								<a href="https://www.facebook.com/nikunj.sharma.08">

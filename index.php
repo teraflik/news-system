@@ -45,7 +45,7 @@ $userID = $_SESSION['userID'];
 		
 		<?php
 		$i = 1;
-		while(($news = $result->fetch_assoc()) && ($i<10)){
+		while(($news = $result->fetch_assoc()) && ($i<37)){
 			if($i%3==1) {
 				echo '<div class="card-deck">';
 			}
@@ -54,6 +54,8 @@ $userID = $_SESSION['userID'];
 			$num1 = $a->fetch_assoc()['quant'];
 			$a = $link->query("SELECT COUNT(*) as quant FROM favourite where newsID='$newsID' && userID = '$userID'") or die($link->error);
 			$num2 = $a->fetch_assoc()['quant'];
+			$a = $link->query("SELECT COUNT(*) as quant FROM comment WHERE newsID = '$newsID'") or die($link->error);
+			$num3 = $a->fetch_assoc()['quant'];
 			echo '<div class="card card-inverse">';
 				echo '<div class="card-header news-category">';
 					echo '<small class="catclass">#'.ucfirst($news['category']).'</small>';
@@ -68,11 +70,11 @@ $userID = $_SESSION['userID'];
 					echo '<div class="btn-group" role="group">';
 					echo '<a class="btn btn-outline-primary btn-sm" href="'.$news['link'].'" target="_blank"">Read More</a>';
 					if($num2 == 0) {
-						echo '<a href="#" class="btn btn-outline-danger btn-sm favourite" data-newsid="'.$news['newsID'].'"><i class="fa fa-star-o"></i> '.$num1.'</a>';						
+						echo '<a href="" class="btn btn-outline-danger btn-sm favourite" data-newsid="'.$news['newsID'].'"><i class="fa fa-star-o"></i> '.$num1.'</a>';						
 					} else if($num2 == 1){
-						echo '<a href="#" class="btn btn-outline-danger btn-sm favourite" data-newsid="'.$news['newsID'].'"><i class="fa fa-star"></i> '.$num1.'</a>';						
+						echo '<a href="" class="btn btn-outline-danger btn-sm favourite" data-newsid="'.$news['newsID'].'"><i class="fa fa-star"></i> '.$num1.'</a>';						
 					}
-					echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-share-alt"></i></a>';
+					echo '<a class="btn btn-outline-success btn-sm" href="#"><i class="fa fa-comment"> '.$num3.'</i></a>';
 					echo '</div>';
 				echo '</div>';
 			echo '</div>';
@@ -94,7 +96,7 @@ $userID = $_SESSION['userID'];
 	<div class="footer-gradient"></div>
 	<footer class="footer">
       <div class="container footer-div">
-      	<span class="text-muted"><a href="index.php">Top</a></span>
+      	<span class="text-muted"><a href="index.php">Latest</a></span>
         <span class="text-muted"><a href="index.php?cat=India">India</a></span>
 		<span class="text-muted"><a href="index.php?cat=World">World</a></span>
 		<span class="text-muted"><a href="index.php?cat=Sports">Sports</a></span>
